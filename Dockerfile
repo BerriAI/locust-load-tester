@@ -6,11 +6,9 @@ WORKDIR /app
 
 # Copy the Locust file and requirements file (if you have one)
 COPY locustfile.py .
-COPY requirements.txt .
 
 # Install Locust and any other dependencies
 RUN pip install --no-cache-dir locust
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the Locust web interface port
 EXPOSE 8089
