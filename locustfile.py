@@ -3,9 +3,9 @@ import uuid
 from locust import HttpUser, task, between
 
 class MyUser(HttpUser):
-    wait_time = between(1, 3)  # Random wait time between requests
+    wait_time = between(0.5, 1)  # Random wait time between requests
 
-    @task
+    @task(100)
     def litellm_completion(self):
         # no cache hits with this
         # Customize the payload with "model" and "messages" keys
