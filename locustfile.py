@@ -15,10 +15,7 @@ class MyUser(HttpUser):
                 {
                     "role": "user", 
                     "content": [
-                                {"type": "text", "text": "What is in this image?"},
-                                {"type": "image_url",
-                                "image_url": {"url": "https://i.etsystatic.com/6267543/r/il/077fe2/3271243073/il_1588xN.3271243073_cmph.jpg"}
-                                }
+                                {"type": "text", "text": "What is in this image?"}
                     ]
                 }
             ]
