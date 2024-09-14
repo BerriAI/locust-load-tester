@@ -10,7 +10,7 @@ class MyUser(HttpUser):
         # no cache hits with this
         # Customize the payload with "model" and "messages" keys
         payload = {
-            "model": "fake-claude-endpoint",
+            "model": "gemini-vision",
             "messages": [
                 {
                     "role": "user", 
