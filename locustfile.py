@@ -8,19 +8,11 @@ class MyUser(HttpUser):
     @task(100)
     def litellm_completion(self):
         # no cache hits with this
-        # Customize the payload with "model" and "messages" keys
         payload = {
-            "model": "fake-claude-endpoint",
-            "messages": [
-                {
-                    "role": "user", 
-                    "content": [
-                                {"type": "text", "text": "What is in this image?"}
-                    ]
-                }
-            ]
+            "model": "fake-openai-endpoint",
+            "messages": [{"role": "user", "content": f"{uuid.uuid4()} This is a test there will be no cache hits and we'll fill up the context" * 150 }],
+            "user": "my-new-end-user-1"
         }
-
         response = self.client.post("chat/completions", json=payload)
         if response.status_code != 200:
             # log the errors in error.txt
@@ -30,5 +22,5 @@ class MyUser(HttpUser):
 
 
     def on_start(self):
-        self.api_key = os.getenv('API_KEY', 'sk-0RJuz8pyx-wgNDz_1I10JQ')
+        self.api_key = os.getenv('API_KEY', 'sk-1234')
         self.client.headers.update({'Authorization': f'Bearer {self.api_key}'})
