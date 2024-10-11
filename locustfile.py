@@ -10,7 +10,7 @@ class MyUser(HttpUser):
         # no cache hits with this
         payload = {
             "model": "db-openai-endpoint",
-            "messages": [{"role": "user", "content": f"{uuid.uuid4()} This is a test there will be no cache hits and we'll fill up the context" * 150 }],
+            "messages": [{"role": "user", "content": f"{uuid.uuid4()} This is a test there will be no cache hits and we'll fill up the context" * 1000 }],
             "user": "my-new-end-user-1"
         }
         response = self.client.post("chat/completions", json=payload)
