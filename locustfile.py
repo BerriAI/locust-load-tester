@@ -10,7 +10,7 @@ class MyUser(HttpUser):
         # no cache hits with this
         # Customize the payload with "model" and "messages" keys
         payload = {
-            "model": "gemini-vision",
+            "model": "fake-openai-endpoint",
             "messages": [
                 {
                     "role": "user", 
