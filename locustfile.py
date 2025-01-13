@@ -12,18 +12,13 @@ class MyUser(HttpUser):
         payload = {
             "model": "fake-openai-endpoint",
             "messages": [
-                {
-                    "role": "user", 
-                    "content": [
-                                {"type": "text", "text": "What is in this image?"},
-                                {"type": "image_url",
-                                "image_url": {"url": "https://i.etsystatic.com/6267543/r/il/077fe2/3271243073/il_1588xN.3271243073_cmph.jpg"}
-                                }
-                    ]
-                }
-            ]
+                {"role": "system", "content": "You are a chat bot."},
+                {"role": "user", "content": "Hello, how are you?"}
+            ],
+            "metadata": {
+                "tags": ["jobID:214590dsff09fds", "taskName:jmeter_load_test"]
+            }
         }
- 
         response = self.client.post("chat/completions", json=payload)
         if response.status_code != 200:
             # log the errors in error.txt
@@ -33,5 +28,5 @@ class MyUser(HttpUser):
 
 
     def on_start(self):
-        self.api_key = os.getenv('API_KEY', 'sk-1234')
+        self.api_key = os.getenv('API_KEY', 'sk-KEjSlM8iPbUdtnzid0YiEA')
         self.client.headers.update({'Authorization': f'Bearer {self.api_key}'})
