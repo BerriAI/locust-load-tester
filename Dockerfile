@@ -17,4 +17,4 @@ EXPOSE 8089
 ENV API_KEY=sk-1234
 
 # Command to run Locust
-CMD ["locust", "-f", "locustfile.py", "--processes", "4"]
+CMD ["locust", "-f", "locustfile.py", "--num_workers", "4"]
