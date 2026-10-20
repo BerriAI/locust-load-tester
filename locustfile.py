@@ -2,11 +2,17 @@ import os
 import uuid
 from locust import HttpUser, task, between, events
 
+API_KEY = os.environ.get("API_KEY", "").strip()
+if not API_KEY:
+    raise SystemExit(
+        "API_KEY is not set. Pass the LiteLLM proxy key at run time, e.g. docker run -e API_KEY=<your key>"
+    )
+
 # Custom metric to track LiteLLM overhead duration
 overhead_durations = []
 
 @events.request.add_listener
-def on_request(request_type, name, response_time, response_length, response, context, exception, start_time, url, **kwargs):
+def on_request(request_type, name, response_time, response_length, response=None, **kwargs):
     if response and hasattr(response, 'headers'):
         overhead_duration = response.headers.get('x-litellm-overhead-duration-ms')
         if overhead_duration:
@@ -48,5 +54,4 @@ class MyUser(HttpUser):
 
 
     def on_start(self):
-        self.api_key = os.getenv('API_KEY', 'sk-U6np9GX-BnDQap5w4sqEGQ')
-        self.client.headers.update({'Authorization': f'Bearer {self.api_key}'})
+        self.client.headers.update({'Authorization': f'Bearer {API_KEY}'})
