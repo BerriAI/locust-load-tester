@@ -12,7 +12,7 @@ if not API_KEY:
 overhead_durations = []
 
 @events.request.add_listener
-def on_request(request_type, name, response_time, response_length, response, context, exception, start_time, url, **kwargs):
+def on_request(request_type, name, response_time, response_length, response=None, **kwargs):
     if response and hasattr(response, 'headers'):
         overhead_duration = response.headers.get('x-litellm-overhead-duration-ms')
         if overhead_duration:
